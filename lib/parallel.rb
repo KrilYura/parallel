@@ -1,6 +1,7 @@
 require 'rbconfig'
 require 'parallel/version'
 require 'parallel/processor_count'
+require 'parallel/extensions'
 
 module Parallel
   extend Parallel::ProcessorCount
@@ -422,4 +423,12 @@ module Parallel
       options[:mutex].synchronize { on_finish.call(item, index, result) } if on_finish
     end
   end
+end
+
+class Array
+  include Parallel::Extensions
+end
+
+class Enumerator
+  include Parallel::Extensions
 end
